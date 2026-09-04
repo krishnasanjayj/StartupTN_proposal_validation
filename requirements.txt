@@ -1,0 +1,38 @@
+# ==============================================================================
+# StartupTN Proposal Evaluation & Monitoring System - Dependencies
+# ==============================================================================
+
+# Core Deep Learning & Transformers (CPU friendly local inference & Cloud GPU training)
+torch>=2.0.0
+transformers>=4.40.0
+accelerate>=0.28.0
+datasets>=2.18.0
+tokenizers>=0.19.0
+safetensors>=0.4.2
+
+# LLM Fine-Tuning & Quantization (Cloud GPU Target)
+peft>=0.10.0
+trl>=0.8.0
+bitsandbytes>=0.43.0; sys_platform != "win32"
+
+# Component 2: Sentence Embeddings & Similarity Search
+sentence-transformers>=2.6.0
+pgvector>=0.2.5
+
+# Component 3 & 4: Financial Analytics, ML & Anomaly Detection
+numpy>=1.26.0
+pandas>=2.2.0
+scikit-learn>=1.4.0
+xgboost>=2.0.0
+
+# Component 15: FastAPI Backend & API Infrastructure
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+pydantic>=2.6.0
+pydantic-settings>=2.2.0
+psycopg2-binary>=2.9.9
+sqlalchemy>=2.0.0
+
+# Testing & Quality Assurance
+pytest>=8.1.0
+httpx>=0.27.0

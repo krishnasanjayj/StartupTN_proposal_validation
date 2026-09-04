@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StartupProposalEvaluation",
+  "type": "object",
+  "required": [
+    "summary",
+    "problem",
+    "solution",
+    "target_market",
+    "business_model",
+    "revenue_model",
+    "strengths",
+    "weaknesses",
+    "risks",
+    "scalability",
+    "recommendation",
+    "confidence_score"
+  ],
+  "properties": {
+    "summary": {
+      "type": "string",
+      "description": "Executive summary of the proposal"
+    },
+    "problem": {
+      "type": "string",
+      "description": "The target problem the startup addresses"
+    },
+    "solution": {
+      "type": "string",
+      "description": "The proposed product/service solution"
+    },
+    "target_market": {
+      "type": "string",
+      "description": "Target customer segments and market size analysis"
+    },
+    "business_model": {
+      "type": "string",
+      "description": "Operational and business workflow model"
+    },
+    "revenue_model": {
+      "type": "string",
+      "description": "Monetization and pricing strategy"
+    },
+    "strengths": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Key strengths of the proposal"
+    },
+    "weaknesses": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Key weaknesses identified"
+    },
+    "risks": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Major execution, market, financial, or regulatory risks"
+    },
+    "scalability": {
+      "type": "string",
+      "description": "Growth and scaling potential assessment"
+    },
+    "recommendation": {
+      "type": "string",
+      "enum": [
+        "PROCEED_TO_HUMAN_EVALUATION",
+        "REQUEST_MORE_INFORMATION",
+        "REJECT_HIGH_RISK",
+        "INSUFFICIENT_INFORMATION"
+      ],
+      "description": "Decision support recommendation for StartupTN officials"
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Model confidence rating based on clarity of proposal input"
+    }
+  }
+}
