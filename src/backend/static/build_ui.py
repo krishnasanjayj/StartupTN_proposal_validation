@@ -181,20 +181,6 @@ HTML = r"""<!DOCTYPE html>
     .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
     .section-title-bar { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; color: var(--text-primary); }
     .section-badge { font-size: 10px; padding: 2px 8px; border-radius: 100px; background: rgba(37,99,235,.1); color: var(--accent-blue); border: 1px solid rgba(37,99,235,.25); font-weight: 600; }
-    .pipeline-wrapper { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm); }
-    .pipeline-steps { display: flex; align-items: flex-start; position: relative; }
-    .pipeline-step { flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; }
-    .pipeline-step + .pipeline-step::before { content: ''; position: absolute; top: 18px; right: 50%; left: -50%; height: 2px; background: var(--border); }
-    .pipeline-step.done + .pipeline-step::before { background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue)); }
-    .step-circle { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-deep); display: flex; align-items: center; justify-content: center; font-size: 14px; position: relative; z-index: 2; transition: var(--transition); box-shadow: 0 1px 3px rgba(0,0,0,.04); }
-    .pipeline-step.done .step-circle { border-color: var(--accent-teal); background: rgba(13,148,136,.1); }
-    .pipeline-step.active .step-circle { border-color: var(--accent-blue); background: rgba(37,99,235,.1); animation: pulse-ring 2s ease infinite; }
-    @keyframes pulse-ring { 0%, 100% { box-shadow: 0 0 10px rgba(37,99,235,.3); } 50% { box-shadow: 0 0 18px rgba(37,99,235,.5); } }
-    .step-label { font-size: 10px; color: var(--text-muted); margin-top: 8px; text-align: center; font-weight: 500; }
-    .pipeline-step.done .step-label { color: var(--accent-teal); font-weight: 600; }
-    .pipeline-step.active .step-label { color: var(--accent-blue); font-weight: 600; }
-    .step-sublabel { font-size: 9px; color: var(--text-dim); text-align: center; margin-top: 2px; }
-
     /* Table */
     .dashboard-two-col { display: flex; gap: 16px; }
     .col-main { flex: 1.4; min-width: 0; }
@@ -474,31 +460,6 @@ HTML = r"""<!DOCTYPE html>
     .btn-send:hover:not(:disabled) { filter: brightness(1.1); }
     .btn-send:disabled { opacity: .35; cursor: not-allowed; box-shadow: none; }
 
-    /* ── MODEL PAGE ── */
-    #pageModel { padding: 24px; overflow-y: auto; flex-direction: column; gap: 20px; scrollbar-width: thin; scrollbar-color: var(--border-med) transparent; }
-    .model-header { background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
-    .model-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at top right, rgba(124,58,237,.06), transparent 60%); }
-    .model-title { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
-    .model-subtitle { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-    .model-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .model-tag { padding: 5px 12px; border-radius: 100px; font-size: 11px; font-weight: 600; border: 1px solid; }
-    .mtag-violet { background: rgba(124,58,237,.08); color: var(--accent-violet); border-color: rgba(124,58,237,.25); }
-    .mtag-blue   { background: rgba(37,99,235,.08); color: var(--accent-blue); border-color: rgba(37,99,235,.25); }
-    .mtag-teal   { background: rgba(13,148,136,.08); color: var(--accent-teal); border-color: rgba(13,148,136,.25); }
-    .mtag-green  { background: rgba(22,163,74,.08); color: var(--accent-green); border-color: rgba(22,163,74,.25); }
-    .model-specs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .spec-card { background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px; transition: var(--transition); box-shadow: var(--shadow-sm); }
-    .spec-card:hover { border-color: var(--border-med); }
-    .spec-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 6px; font-weight: 600; }
-    .spec-value { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--text-primary); }
-    .spec-sub { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
-    .training-chart { background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm); }
-    .loss-svg { width: 100%; height: 140px; }
-    .perf-table { width: 100%; border-collapse: collapse; }
-    .perf-table th, .perf-table td { padding: 10px 14px; text-align: left; font-size: 12px; border-bottom: 1px solid var(--border); color: #0f172a; }
-    .perf-table th { color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: .6px; background: #f8fafc; font-weight: 600; }
-    .perf-table tr:last-child td { border-bottom: none; }
-    .perf-table tr:hover td { background: #f8fafc; }
 
     /* ── LOADING BANNER ── */
     .model-loading-banner { background: #fefce8; border-bottom: 1px solid #fef08a; padding: 8px 20px; font-size: 12px; color: #a16207; display: flex; align-items: center; gap: 10px; flex-shrink: 0; z-index: 50; }
@@ -531,15 +492,11 @@ HTML = r"""<!DOCTYPE html>
   <div class="topbar-left">
     <a href="#" class="brand">
       <img src="/static/startuptn-logo.jpg" alt="StartupTN Logo" class="brand-logo" />
-      <div>
-        <div class="brand-title">StartupTN</div>
-        <div class="brand-sub">Gov. of Tamil Nadu &middot; Decision Support System</div>
-      </div>
+      <div class="brand-title">StartupTN</div>
     </a>
     <nav class="nav-tabs" id="navTabs">
       <button class="nav-tab active" data-page="pageDashboard" id="tabDashboard"><span class="tab-dot"></span> Dashboard</button>
       <button class="nav-tab" data-page="pageEvaluator" id="tabEvaluator"><span class="tab-dot" style="background:var(--accent-violet)"></span> Proposal Evaluator</button>
-      <button class="nav-tab" data-page="pageModel" id="tabModel"><span class="tab-dot" style="background:var(--accent-teal)"></span> AI Model Info</button>
     </nav>
   </div>
   <div class="topbar-right">
@@ -576,20 +533,6 @@ HTML = r"""<!DOCTYPE html>
         <line x1="16" y1="13" x2="8" y2="13"></line>
         <line x1="16" y1="17" x2="8" y2="17"></line>
         <polyline points="10 9 9 9 8 9"></polyline>
-      </svg>
-    </button>
-    <button class="sidebar-btn" id="sideBtnModel" data-page="pageModel" data-tip="AI Model Info">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="4" y="4" width="16" height="16" rx="2"></rect>
-        <rect x="9" y="9" width="6" height="6"></rect>
-        <line x1="9" y1="1" x2="9" y2="4"></line>
-        <line x1="15" y1="1" x2="15" y2="4"></line>
-        <line x1="9" y1="20" x2="9" y2="23"></line>
-        <line x1="15" y1="20" x2="15" y2="23"></line>
-        <line x1="20" y1="9" x2="23" y2="9"></line>
-        <line x1="20" y1="14" x2="23" y2="14"></line>
-        <line x1="1" y1="9" x2="4" y2="9"></line>
-        <line x1="1" y1="14" x2="4" y2="14"></line>
       </svg>
     </button>
     <div class="sidebar-sep"></div>
@@ -703,6 +646,16 @@ HTML = r"""<!DOCTYPE html>
                 <tr><td class="td-startup">GreenEV Motors</td><td class="td-sector">CleanTech</td><td>Series A</td><td class="td-score" style="color:var(--accent-green)">88%</td><td><span class="verdict-tag tag-proceed">&#x2705; Proceed</span></td><td style="color:var(--text-muted);font-size:11px">1d ago</td></tr>
                 <tr><td class="td-startup">FinTrack SME</td><td class="td-sector">FinTech</td><td>MVP</td><td class="td-score" style="color:var(--accent-green)">85%</td><td><span class="verdict-tag tag-proceed">&#x2705; Proceed</span></td><td style="color:var(--text-muted);font-size:11px">1d ago</td></tr>
                 <tr><td class="td-startup">LogiRoute TN</td><td class="td-sector">Logistics</td><td>Seed</td><td class="td-score" style="color:var(--accent-yellow)">67%</td><td><span class="verdict-tag tag-request">&#x1F4CB; More Info</span></td><td style="color:var(--text-muted);font-size:11px">2d ago</td></tr>
+                <tr><td class="td-startup">VYOMAI Technologies</td><td class="td-sector">DeepTech</td><td>MVP</td><td class="td-score" style="color:var(--accent-green)">91%</td><td><span class="verdict-tag tag-proceed">&#x2705; Proceed</span></td><td style="color:var(--text-muted);font-size:11px">2d ago</td></tr>
+                <tr><td class="td-startup">VoltGrid Systems</td><td class="td-sector">CleanTech</td><td>Early Traction</td><td class="td-score" style="color:var(--accent-green)">94%</td><td><span class="verdict-tag tag-proceed">&#x2705; Proceed</span></td><td style="color:var(--text-muted);font-size:11px">3d ago</td></tr>
+                <tr><td class="td-startup">PadikkalamTN EdTech</td><td class="td-sector">EdTech</td><td>Early Traction</td><td class="td-score" style="color:var(--accent-green)">87%</td><td><span class="verdict-tag tag-proceed">&#x2705; Proceed</span></td><td style="color:var(--text-muted);font-size:11px">3d ago</td></tr>
+                <tr><td class="td-startup">CardioAI Health Labs</td><td class="td-sector">HealthTech</td><td>Prototype</td><td class="td-score" style="color:var(--accent-red)">39%</td><td><span class="verdict-tag tag-reject">&#x274C; Rejected</span></td><td style="color:var(--text-muted);font-size:11px">4d ago</td></tr>
+                <tr><td class="td-startup">FreshVayal Logistics</td><td class="td-sector">AgriTech</td><td>MVP</td><td class="td-score" style="color:var(--accent-green)">81%</td><td><span class="verdict-tag tag-proceed">&#x2705; Proceed</span></td><td style="color:var(--text-muted);font-size:11px">4d ago</td></tr>
+                <tr><td class="td-startup">VaniyaCredit Tech</td><td class="td-sector">FinTech</td><td>Growth</td><td class="td-score" style="color:var(--accent-green)">95%</td><td><span class="verdict-tag tag-proceed">&#x2705; Proceed</span></td><td style="color:var(--text-muted);font-size:11px">5d ago</td></tr>
+                <tr><td class="td-startup">NalamKootu Agri</td><td class="td-sector">AgriTech</td><td>Idea</td><td class="td-score" style="color:var(--accent-yellow)">64%</td><td><span class="verdict-tag tag-request">&#x1F4CB; More Info</span></td><td style="color:var(--text-muted);font-size:11px">5d ago</td></tr>
+                <tr><td class="td-startup">ThiruEV Charge</td><td class="td-sector">CleanTech</td><td>Early Traction</td><td class="td-score" style="color:var(--accent-green)">89%</td><td><span class="verdict-tag tag-proceed">&#x2705; Proceed</span></td><td style="color:var(--text-muted);font-size:11px">6d ago</td></tr>
+                <tr><td class="td-startup">MSME Ledger Tech</td><td class="td-sector">SaaS</td><td>Idea</td><td class="td-score" style="color:var(--accent-red)">48%</td><td><span class="verdict-tag tag-reject">&#x274C; Rejected</span></td><td style="color:var(--text-muted);font-size:11px">6d ago</td></tr>
+                <tr><td class="td-startup">KadanNool Fintech</td><td class="td-sector">FinTech</td><td>MVP</td><td class="td-score" style="color:var(--accent-yellow)">78%</td><td><span class="verdict-tag tag-request">&#x1F4CB; More Info</span></td><td style="color:var(--text-muted);font-size:11px">1w ago</td></tr>
               </tbody>
             </table>
           </div>
@@ -742,6 +695,38 @@ HTML = r"""<!DOCTYPE html>
                 <div class="activity-title">Model checkpoint saved</div>
                 <div class="activity-desc">Epoch 3/5 &middot; Loss: 0.312 &middot; ROUGE-L: 0.71</div>
                 <div class="activity-time">06:30 &middot; 19 Sep 2026</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon icon-green">&#x2705;</div>
+              <div class="activity-text">
+                <div class="activity-title">VoltGrid Systems &mdash; TANSEED Fast-Track</div>
+                <div class="activity-desc">Confidence 94% &middot; Micro-channel EV cooling plate patent verified</div>
+                <div class="activity-time">16:20 &middot; 18 Sep 2026</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon icon-orange">&#x26A0;&#xFE0F;</div>
+              <div class="activity-text">
+                <div class="activity-title">CardioAI Health &mdash; Disqualification</div>
+                <div class="activity-desc">Missing CDSCO trial records &middot; Medical liability risk &mdash; REJECT</div>
+                <div class="activity-time">14:15 &middot; 18 Sep 2026</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon icon-blue">&#x1F50D;</div>
+              <div class="activity-text">
+                <div class="activity-title">VaniyaCredit &mdash; NBFC Partner Verified</div>
+                <div class="activity-desc">&#x20B9;18 Cr disbursed to 640 MSMEs &middot; Gross NPA 2.1% audited</div>
+                <div class="activity-time">11:45 &middot; 17 Sep 2026</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon icon-violet">&#x1F9E0;</div>
+              <div class="activity-text">
+                <div class="activity-title">pgvector Knowledge Base Sync</div>
+                <div class="activity-desc">250 startup vectors updated &middot; HNSW cosine index refreshed</div>
+                <div class="activity-time">08:00 &middot; 17 Sep 2026</div>
               </div>
             </div>
           </div>
@@ -833,7 +818,6 @@ HTML = r"""<!DOCTYPE html>
             <!-- Empty Placeholder -->
             <div class="eval-placeholder" id="evalPlaceholder">
               <div class="placeholder-hero">
-                <div class="ph-badge"><span class="ai-pulse"></span> STARTUPTN DECISION SUPPORT AI</div>
                 <h2 class="ph-title">Startup Proposal Intelligence &amp; Evaluation</h2>
                 <p class="ph-desc">Upload an applicant proposal document (.pdf, .docx, .txt) on the left to begin automated evaluation. The fine-tuned Qwen3 engine assesses proposals across 16 governance, financial, and risk criteria in real-time.</p>
 
@@ -898,177 +882,6 @@ HTML = r"""<!DOCTYPE html>
 
       </div>
     </div><!-- /pageEvaluator -->
-
-    <!-- ===== MODEL INFO ===== -->
-    <div class="page" id="pageModel">
-      <div class="model-header">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;">
-          <div>
-            <div class="model-title">&#x1F9E0; Qwen3-0.6B &mdash; QLoRA Fine-Tuned</div>
-            <div class="model-subtitle">
-              Specialized domain adaptation for StartupTN proposal validation, risk scoring, and TANSEED committee recommendations.
-            </div>
-            <div class="model-tags">
-              <span class="model-tag mtag-violet">QLoRA 4-bit (bitsandbytes)</span>
-              <span class="model-tag mtag-blue">LoRA Rank r=16 &middot; alpha=32</span>
-              <span class="model-tag mtag-teal">Flash Attention 2</span>
-              <span class="model-tag mtag-green">Loss: 0.198 (Epoch 5)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="model-specs-grid">
-        <div class="spec-card"><div class="spec-label">Base Architecture</div><div class="spec-value">Qwen/Qwen3-0.6B</div><div class="spec-sub">Decoder-only transformer</div></div>
-        <div class="spec-card"><div class="spec-label">Trainable Parameters</div><div class="spec-value">4.2M / 590M</div><div class="spec-sub">0.71% parameter efficiency</div></div>
-        <div class="spec-card"><div class="spec-label">Context Window</div><div class="spec-value">8,192 tokens</div><div class="spec-sub">Full pitch deck ingestion</div></div>
-        <div class="spec-card"><div class="spec-label">API Framework</div><div class="spec-value">FastAPI</div><div class="spec-sub">Async &middot; REST &middot; PDF extraction</div></div>
-      </div>
-
-      <div class="training-chart">
-        <div class="section-header" style="margin-bottom:16px;">
-          <div class="section-title-bar">&#x1F4C9; Training Loss Curve <span class="section-badge">Epoch 5/5</span></div>
-          <span style="font-size:11px;color:var(--accent-green);font-family:'JetBrains Mono',monospace">Final loss: 0.198</span>
-        </div>
-        <svg class="loss-svg" viewBox="0 0 600 130" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="lossGrad" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stop-color="#7c3aed" stop-opacity=".25"/>
-              <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-          <line x1="0" y1="25" x2="600" y2="25" stroke="rgba(15,23,42,.06)" stroke-width="1"/>
-          <line x1="0" y1="50" x2="600" y2="50" stroke="rgba(15,23,42,.06)" stroke-width="1"/>
-          <line x1="0" y1="75" x2="600" y2="75" stroke="rgba(15,23,42,.06)" stroke-width="1"/>
-          <line x1="0" y1="100" x2="600" y2="100" stroke="rgba(15,23,42,.06)" stroke-width="1"/>
-          <path d="M0,10 C60,12 100,22 150,38 C200,54 240,68 300,80 C360,90 400,100 450,108 C500,114 550,118 600,120 L600,130 L0,130 Z" fill="url(#lossGrad)"/>
-          <path d="M0,10 C60,12 100,22 150,38 C200,54 240,68 300,80 C360,90 400,100 450,108 C500,114 550,118 600,120" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="0"   cy="10"  r="4" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
-          <circle cx="120" cy="35"  r="4" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
-          <circle cx="240" cy="65"  r="4" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
-          <circle cx="360" cy="90"  r="4" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
-          <circle cx="480" cy="110" r="4" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
-          <circle cx="600" cy="120" r="4" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
-          <text x="4"   y="8"   font-size="9" fill="#64748b">1.24</text>
-          <text x="124" y="33"  font-size="9" fill="#64748b">0.89</text>
-          <text x="244" y="63"  font-size="9" fill="#64748b">0.61</text>
-          <text x="364" y="88"  font-size="9" fill="#64748b">0.41</text>
-          <text x="484" y="108" font-size="9" fill="#64748b">0.28</text>
-          <text x="550" y="118" font-size="9" fill="#16a34a">0.20</text>
-        </svg>
-        <div style="display:flex;justify-content:space-between;margin-top:4px;">
-          <span style="font-size:10px;color:var(--text-muted)">Epoch 1</span><span style="font-size:10px;color:var(--text-muted)">Epoch 2</span>
-          <span style="font-size:10px;color:var(--text-muted)">Epoch 3</span><span style="font-size:10px;color:var(--text-muted)">Epoch 4</span>
-          <span style="font-size:10px;color:var(--text-muted)">Epoch 5</span>
-        </div>
-      </div>
-
-      <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);">
-        <div style="padding:14px 16px;border-bottom:1px solid var(--border);">
-          <div class="section-title-bar">&#x1F4CA; Evaluation Metrics (Before vs After Fine-tune)</div>
-        </div>
-        <table class="perf-table">
-          <thead><tr><th>Metric</th><th>Before Fine-tune</th><th>After Fine-tune</th><th>Improvement</th></tr></thead>
-          <tbody>
-            <tr><td>ROUGE-L</td><td style="color:var(--text-secondary)">0.51</td><td style="color:var(--accent-green);font-weight:600">0.71</td><td style="color:var(--accent-green)">&#x2191; +39.2%</td></tr>
-            <tr><td>JSON Schema Compliance</td><td style="color:var(--text-secondary)">62%</td><td style="color:var(--accent-green);font-weight:600">97.4%</td><td style="color:var(--accent-green)">&#x2191; +57.1%</td></tr>
-            <tr><td>Avg Confidence Score</td><td style="color:var(--text-secondary)">74%</td><td style="color:var(--accent-green);font-weight:600">82.3%</td><td style="color:var(--accent-green)">&#x2191; +11.2%</td></tr>
-            <tr><td>Hallucination Rate</td><td style="color:var(--text-secondary)">18%</td><td style="color:var(--accent-green);font-weight:600">4.2%</td><td style="color:var(--accent-green)">&#x2193; &minus;76.7%</td></tr>
-            <tr><td>Avg Inference Time (CPU)</td><td style="color:var(--text-secondary)">38s</td><td style="color:var(--accent-green);font-weight:600">25s</td><td style="color:var(--accent-green)">&#x2193; &minus;34.2%</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);margin-top:20px;">
-        <div style="padding:14px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
-          <div class="section-title-bar">&#x1F52C; Empirical Model Selection Proof (Sub-1.5B Edge SLMs)</div>
-          <span style="font-size:11px;color:var(--text-muted)">Evaluated on Intel Core i5-12450H CPU &middot; 16GB RAM &middot; No GPU</span>
-        </div>
-        <table class="perf-table">
-          <thead>
-            <tr>
-              <th>Model Architecture</th>
-              <th>Parameters</th>
-              <th>Peak RAM</th>
-              <th>CPU Speed</th>
-              <th>Latency</th>
-              <th>JSON Validity</th>
-              <th>Selection Verdict</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="background:rgba(22,163,74,.05);font-weight:600;">
-              <td style="color:#000000;">&#x2B50; Qwen/Qwen3-0.6B</td>
-              <td>596M</td>
-              <td>1.18 GB</td>
-              <td style="color:var(--accent-green)">24.6 tok/s</td>
-              <td style="color:var(--accent-green)">2.14 s</td>
-              <td style="color:var(--accent-green)">98.4%</td>
-              <td><span style="background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:700;">SELECTED (Winner)</span></td>
-            </tr>
-            <tr>
-              <td>Qwen/Qwen2.5-0.5B-Instruct</td>
-              <td>494M</td>
-              <td>0.95 GB</td>
-              <td>27.8 tok/s</td>
-              <td>1.88 s</td>
-              <td>89.5%</td>
-              <td><span style="background:#f1f5f9;color:#64748b;padding:2px 8px;border-radius:12px;font-size:11px;">Lower schema adherence</span></td>
-            </tr>
-            <tr>
-              <td>meta-llama/Llama-3.2-1B-Instruct</td>
-              <td>1.23B</td>
-              <td>2.85 GB</td>
-              <td>9.2 tok/s</td>
-              <td>6.18 s</td>
-              <td>92.1%</td>
-              <td><span style="background:#fee2e2;color:#b91c1c;padding:2px 8px;border-radius:12px;font-size:11px;">Exceeds RAM &amp; latency limit</span></td>
-            </tr>
-            <tr>
-              <td>HuggingFaceTB/SmolLM2-360M</td>
-              <td>362M</td>
-              <td>0.72 GB</td>
-              <td>34.1 tok/s</td>
-              <td>1.52 s</td>
-              <td>56.0%</td>
-              <td><span style="background:#fee2e2;color:#b91c1c;padding:2px 8px;border-radius:12px;font-size:11px;">Severe schema truncations</span></td>
-            </tr>
-            <tr>
-              <td>TinyLlama/TinyLlama-1.1B-Chat</td>
-              <td>1.10B</td>
-              <td>2.41 GB</td>
-              <td>10.4 tok/s</td>
-              <td>5.26 s</td>
-              <td>61.2%</td>
-              <td><span style="background:#fee2e2;color:#b91c1c;padding:2px 8px;border-radius:12px;font-size:11px;">Markdown leaks &amp; slow</span></td>
-            </tr>
-          </tbody>
-        </table>
-        <div style="padding:12px 16px;background:#f8fafc;border-top:1px solid var(--border);font-size:11px;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center;">
-          <span><strong>Empirical Conclusion:</strong> Qwen3-0.6B achieves the optimal Pareto frontier across CPU latency, RAM headroom, and strict 16-point JSON compliance.</span>
-          <span style="font-family:'JetBrains Mono',monospace;color:var(--text-muted)">docs/MODEL_SELECTION_AND_BENCHMARK_REPORT.md</span>
-        </div>
-      </div>
-
-      <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--radius-md);padding:18px;box-shadow:var(--shadow-sm);margin-top:20px;">
-        <div class="section-header" style="margin-bottom:14px;"><div class="section-title-bar">&#x1F527; Technology Stack</div></div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
-          <div style="background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;">
-            <div style="font-weight:600;font-size:12px;margin-bottom:4px;color:var(--text-primary)">Qwen/Qwen3-0.6B</div>
-            <div style="font-size:11px;color:var(--text-secondary)">Base LLM &middot; HuggingFace Transformers &middot; PyTorch</div>
-          </div>
-          <div style="background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;">
-            <div style="font-weight:600;font-size:12px;margin-bottom:4px;color:var(--text-primary)">PEFT / QLoRA</div>
-            <div style="font-size:11px;color:var(--text-secondary)">4-bit NF4 quant &middot; LoRA adapters &middot; bitsandbytes</div>
-          </div>
-          <div style="background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;">
-            <div style="font-weight:600;font-size:12px;margin-bottom:4px;color:var(--text-primary)">FastAPI + PyMuPDF</div>
-            <div style="font-size:11px;color:var(--text-secondary)">Asynchronous REST API &middot; Document text extraction</div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /pageModel -->
 
   </div><!-- /content-area -->
 
