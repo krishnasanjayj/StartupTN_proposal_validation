@@ -19,7 +19,8 @@ from trl import SFTTrainer, SFTConfig
 def parse_args():
     parser = argparse.ArgumentParser(description="StartupTN Proposal Evaluation LLM SFT Trainer")
     parser.add_argument("--model_name_or_path", type=str, default="Qwen/Qwen3-0.6B", help="Base model path")
-    parser.add_argument("--dataset_path", type=str, default="data/processed/startup_proposals_sample.jsonl", help="Processed JSONL dataset")
+    parser.add_argument("--dataset_path", type=str, default="data/processed/startup_proposals_synthetic.jsonl",
+                        help="Processed JSONL dataset path or glob pattern (e.g. data/processed/*.jsonl to merge all files)")
     parser.add_argument("--output_dir", type=str, default="models/qwen_startup_lora", help="Output directory for LoRA adapter")
     parser.add_argument("--lora_r", type=int, default=16, help="LoRA rank")
     parser.add_argument("--lora_alpha", type=int, default=32, help="LoRA alpha")
@@ -42,13 +43,18 @@ def main():
     if device == "cpu" and not args.dry_run:
         print("[WARNING] Running full LLM fine-tuning on CPU is very slow. Consider running with --dry-run locally or on a Cloud GPU.")
 
-    # 1. Load Dataset
-    if not os.path.exists(args.dataset_path):
-        raise FileNotFoundError(f"Dataset path '{args.dataset_path}' does not exist.")
-        
-    print(f"Loading dataset from: {args.dataset_path}")
-    raw_dataset = load_dataset("json", data_files=args.dataset_path, split="train")
-    print(f"Loaded {len(raw_dataset)} dataset records.")
+    # 1. Load Dataset (supports glob patterns to merge multiple JSONL files)
+    import glob as _glob
+    matched_files = _glob.glob(args.dataset_path)
+    if not matched_files:
+        raise FileNotFoundError(f"No dataset files matched pattern '{args.dataset_path}'.")
+
+    matched_files = sorted(matched_files)
+    print(f"Loading dataset from {len(matched_files)} file(s):")
+    for f in matched_files:
+        print(f"  - {f}")
+    raw_dataset = load_dataset("json", data_files=matched_files, split="train")
+    print(f"Loaded {len(raw_dataset)} dataset records total.")
 
     # 2. Load Tokenizer & Model
     print(f"Loading tokenizer & model: {args.model_name_or_path}")

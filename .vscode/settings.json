@@ -1,0 +1,6 @@
+{
+    "python.defaultInterpreterPath": "/home/sanjay/py/bin/python3",
+    "python.analysis.extraPaths": [
+        "/home/sanjay/py/lib/python3.14/site-packages"
+    ]
+}

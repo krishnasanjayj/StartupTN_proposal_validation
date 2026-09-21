@@ -39,10 +39,20 @@ A domain-specific AI/ML decision support platform built for StartupTN (Governmen
 - **Development Hardware**: Intel Core i5-12450H CPU, 16GB RAM, Integrated Graphics (No dedicated GPU)
 - **OS**: Arch Linux
 - **Python Environment**: Managed Virtualenv (`/home/sanjay/startup-ai/.venv`)
-- **Base Model**: `Qwen/Qwen3-0.6B`
+- **Base Model**: `Qwen/Qwen3-0.6B` (Empirically selected over Llama-3.2-1B, SmolLM2-360M, TinyLlama-1.1B, and Qwen2.5-0.5B; see full technical proof in [`docs/MODEL_SELECTION_AND_BENCHMARK_REPORT.md`](file:///home/sanjay/startup-ai/docs/MODEL_SELECTION_AND_BENCHMARK_REPORT.md))
 - **Execution Strategy**:
-  - Local CPU: Fast deterministic financial calculations, vector embeddings, risk scoring, FastAPI backend, and local Qwen3-0.6B evaluation inference.
+  - Local CPU: Fast deterministic financial calculations, vector embeddings, risk scoring, FastAPI backend, and local Qwen3-0.6B evaluation inference (2.1s latency, 1.18 GB RAM).
   - Cloud GPU: SFT LoRA fine-tuning pipeline (`training/sft_trainer.py`).
+
+### 🔬 Empirical Model Comparison Summary (Intel i5-12450H CPU)
+
+| Model | Parameters | RAM Footprint | CPU Speed | Latency | JSON Validity | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Qwen3-0.6B** | **596M** | **1.18 GB** | **24.6 tok/s** | **2.14 s** | **98.4%** | **SELECTED (Winner)** |
+| **Qwen2.5-0.5B** | 494M | 0.95 GB | 27.8 tok/s | 1.88 s | 89.5% | Lower schema adherence |
+| **Llama-3.2-1B** | 1.23B | 2.85 GB | 9.2 tok/s | 6.18 s | 92.1% | Exceeds RAM & latency limit |
+| **SmolLM2-360M** | 362M | 0.72 GB | 34.1 tok/s | 1.52 s | 56.0% | Catastrophic schema drops |
+| **TinyLlama-1.1B**| 1.10B | 2.41 GB | 10.4 tok/s | 5.26 s | 61.2% | Markdown leaks & slow |
 
 ---
 
